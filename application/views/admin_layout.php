@@ -10,6 +10,7 @@
         
         <!-- JQuery UI -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>js/jquery-ui-1.10.2/themes/base/jquery.ui.all.css" />
+        <link rel="stylesheet" href="<?php echo base_url(); ?>css/jquery.datetimepicker.css" />
         <!--Foundation-->
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/normalize.css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/foundation.css" />
@@ -63,6 +64,7 @@
         <script src="<?php echo base_url(); ?>js/tiny_mce/tiny_mce.js"></script>
 
         <script src="<?php echo base_url(); ?>js/jquery-ui-1.10.2/ui/jquery-ui.js"></script>
+        <script src="<?php echo base_url(); ?>js/jquery.datetimepicker.js"></script>
         
         <?=$JS?>
         

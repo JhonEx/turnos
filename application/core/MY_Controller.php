@@ -305,9 +305,17 @@ abstract class MY_Controller extends MX_Controller
             }
             
             $cont = 0;
+            $fields = array_keys($this->model->getFields());
+            
             foreach ($register as $aRegister){
                 if ($aRegister instanceof DateTime){
                     $register[$cont] = $aRegister->format("Y-m-d");
+                    $aField = $fields[$cont];
+                    
+                    if (in_array($aField, $this->model->getTypesTime())){
+                        $register[$cont] = $aRegister->format("H:i:s");
+                    }
+                    
                 }
                 $cont++;
             }
