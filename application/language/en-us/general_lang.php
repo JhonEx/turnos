@@ -150,3 +150,13 @@ $lang["holiday_edition"]    = "Holiday edited successfully";
 $lang["holiday_delete"]          = "Holiday deleted successfully";
 $lang["message_delete_holiday"]  = "Are you sure to delete the holiday?";
 
+/*TURNS*/
+$lang["turn"]    = "Turn";
+$lang['initialTime'] = 'InitialTime';
+$lang['endTime'] = 'EndTime';
+$lang["create_turn"]     = "Create turn";
+$lang["return_turn"]     = "Back to turns";
+$lang["turn_creation"]   = "Turn created successfully";
+$lang["turn_edition"]    = "Turn edited successfully";
+$lang["turn_delete"]          = "Turn deleted successfully";
+$lang["message_delete_turn"]  = "Are you sure to delete the turn?";

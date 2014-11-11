@@ -73,4 +73,12 @@ $lang['Holidays_form']='Holidays_form';
 $lang['Holidays_persist']='Holidays_persist';
 $lang['Holidays_delete']='Holidays_delete';
 
+$lang['Turns']='Turns';
+$lang['Turns_index']='Turns_index';
+$lang['Turns_setListParameters']='Turns_setListParameters';
+$lang['Turns_form']='Turns_form';
+$lang['Turns_persist']='Turns_persist';
+$lang['Turns_delete']='Turns_delete';
+
+
 $lang['Security']='Security';
