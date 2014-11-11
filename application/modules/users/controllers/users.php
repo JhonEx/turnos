@@ -19,7 +19,7 @@ class Users extends MY_Controller
         $model = new Model("Users", "u", array("id"=>"id", "name"=>"name", "last_name"=>"last_name", "email"=>"email"));
         $model->setNumerics(array("u.id"));
         
-        $profile = new Model("Profiles", "p", array("name"=>"nameP"));
+        $profile = new Model("XXX", "p", array("name"=>"nameP"));
         $profile->setRelation("profile");
         $profile->setConditions(array("p.id<>".AuthConstants::ID_PROFILE_USER));
         

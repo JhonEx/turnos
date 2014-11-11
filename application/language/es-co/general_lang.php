@@ -1,13 +1,13 @@
 <?php
 /*GENERAL*/
 $lang["logout"]     = "Salir";
-$lang["actions"]    = "Actions";
-$lang["delete"]     = "Delete";
-$lang["edit"]       = "Edit";
-$lang["options"]    = "Options";
-$lang["send"]       = "Send";
-$lang["clear"]      = "Clear";
-$lang["yes"]        = "YES";
+$lang["actions"]    = "Acciones";
+$lang["delete"]     = "Borrar";
+$lang["edit"]       = "Editar";
+$lang["options"]    = "Opciones";
+$lang["send"]       = "Enviar";
+$lang["clear"]      = "Limpiar";
+$lang["yes"]        = "SI";
 $lang["no"]         = "NO";
 
 $lang["default_select"]     = "-Select-";
