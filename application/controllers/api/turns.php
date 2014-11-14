@@ -37,6 +37,7 @@ class Turns extends REST_Controller
             }
         
             $turn = $this->em->find('models\Turns', $this->post("id"));
+            $turn->setName($this->post('name'));
             $turn->setInitialTime(new DateTime($this->post('initialTime')));
 			$turn->setEndTime(new DateTime($this->post('endTime')));
             $this->em->persist($turn);
@@ -57,6 +58,7 @@ class Turns extends REST_Controller
     {
         try {
             $turn = new models\Turns();
+            $turn->setName($this->put('name'));
             $turn->setInitialTime(new DateTime($this->put('initialTime')));
 			$turn->setEndTime(new DateTime($this->put('endTime')));
             $this->em->persist($turn);

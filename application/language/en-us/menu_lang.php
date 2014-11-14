@@ -80,5 +80,12 @@ $lang['Turns_form']='Turns_form';
 $lang['Turns_persist']='Turns_persist';
 $lang['Turns_delete']='Turns_delete';
 
+$lang['Schedules']='Schedules';
+$lang['Schedules_index']='Schedules_index';
+$lang['Schedules_setListParameters']='Schedules_setListParameters';
+$lang['Schedules_form']='Schedules_form';
+$lang['Schedules_persist']='Schedules_persist';
+$lang['Schedules_delete']='Schedules_delete';
+
 
 $lang['Security']='Security';

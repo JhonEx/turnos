@@ -5,42 +5,35 @@ namespace models;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @author Heyward Jimenez
- * @version 1.0
- * @created 23-Ene-2012 02:39:38 p.m.
- * 
- * @Entity
- * @Table(name="users_data")
+ * UsersData
  */
 class UsersData
 {
     /**
-     * @Id
-     * @Column(type="integer", nullable=false)
-     * @GeneratedValue(strategy="AUTO") 
+     * @var integer
      */
     private $id;
-    
-    /**
-     * @OneToOne(targetEntity="Users", inversedBy="user_data", cascade={"all"})
-     */
-    private $user;
-    
-    /**
-     * @OneToMany(targetEntity="Schedules", mappedBy="user")
-     */
-    private $turns;
 
     /**
-     * @Column(type="string", nullable=false)
+     * @var string
      */
     private $identification;
 
     /**
-     * @Column(type="string", nullable=false)
+     * @var string
      */
     private $telephone;
-    
+
+    /**
+     * @var \models\Users
+     */
+    private $user;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $turns;
+
     /**
      * Constructor
      */
@@ -48,7 +41,7 @@ class UsersData
     {
         $this->turns = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     /**
      * Get id
      *
@@ -58,27 +51,7 @@ class UsersData
     {
         return $this->id;
     }
-    
-    /**
-     * Set user
-     *
-     * @param models\Users $user
-     */
-    public function setUser(\models\Users $user)
-    {
-        $this->user = $user;
-    }
 
-    /**
-     * Get user
-     *
-     * @return models\Users 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-    
     /**
      * Set identification
      *
@@ -101,7 +74,7 @@ class UsersData
     {
         return $this->identification;
     }
-    
+
     /**
      * Set telephone
      *
@@ -124,7 +97,30 @@ class UsersData
     {
         return $this->telephone;
     }
+
+    /**
+     * Set user
+     *
+     * @param \models\Users $user
+     * @return UsersData
+     */
+    public function setUser(\models\Users $user = null)
+    {
+        $this->user = $user;
     
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \models\Users 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
     /**
      * Add turns
      *
@@ -156,19 +152,5 @@ class UsersData
     public function getTurns()
     {
         return $this->turns;
-    }
-
-    public function toArray($user = true)
-    {
-        $return = array();
-        
-        $return['id']               = $this->getId();
-        if ($user){
-            $return['user']             = $this->getUser()->toArray();
-        }
-        $return['identification']   = $this->getIdentification();
-        $return['telephone']        = $this->getTelephone();
-        
-        return $return;
     }
 }

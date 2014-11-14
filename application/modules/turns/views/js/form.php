@@ -10,10 +10,12 @@
             rules: {
                 initialTime: 'required',
 				endTime: 'required',
+				name: 'required',
             },
             messages: {
                 initialTime:'<?=lang('required')?>',
 				endTime:'<?=lang('required')?>',
+				name:'<?=lang('required')?>',
             },
             submitHandler: function(form) {
                 $('#form').ajaxSubmit({success: function(data){

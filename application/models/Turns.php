@@ -21,6 +21,11 @@ class Turns
      * @GeneratedValue(strategy="AUTO") 
      */
     private $id;
+    
+    /**
+     * @Column(type="string", length=100, nullable=false) 
+     */
+    private $name;
 
     /**
      * @Column(type="time", nullable=false) 
@@ -40,6 +45,29 @@ class Turns
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param String $name
+     * @return Turns
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return String 
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -92,11 +120,12 @@ class Turns
     {
         $return = array();
         $return['id']           = $this->getId();
-        $return['initial_time']         = "";
-        $return['end_time']         = "";
+        $return['name']         = $this->getName();
+        $return['initial_time'] = "";
+        $return['end_time']     = "";
         
         if (is_null($this->getInitialTime()) == false){
-            $return['initial_time']    = $this->getInitialTime()->format("H-i");
+            $return['initial_time']    = $this->getInitialTime()->format("H:i");
         }
         
         if (is_null($this->getEndTime()) == false){
