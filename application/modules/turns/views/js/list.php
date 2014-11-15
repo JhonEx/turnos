@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         var list = $('#list').dataTable( {
-            "aoColumns":[{"bVisible": false},null ,null,{ "bSortable": false,"bSearchable": false }],
+            "aoColumns":[{"bVisible": false},null ,null,null,{ "bSortable": false,"bSearchable": false }],
             "sAjaxSource": "<?php echo site_url('/turns/getList'); ?>",
         });
 

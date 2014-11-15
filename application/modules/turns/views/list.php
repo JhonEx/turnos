@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th><?php echo lang('id') ?></th>
+            <th><?=lang('name')?></th>
             <th><?=lang('initialTime')?></th>
 			<th><?=lang('endTime')?></th>
             <th><?php echo lang('actions') ?></th>

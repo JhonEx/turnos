@@ -16,7 +16,7 @@ class Turns extends MY_Controller
 	{
         $this->load->helper('action');
 
-        $model = new Model("Turns", "t", array("id" => "id", 'initialTime' => 'initialTime' ,'endTime' => 'endTime'));
+        $model = new Model("Turns", "t", array("id" => "id", 'name' => 'name', 'initialTime' => 'initialTime', 'endTime' => 'endTime'));
         $model->setNumerics(array("t.id"));
         $model->setTypesTime(array("initialTime", "endTime"));
 
@@ -33,12 +33,14 @@ class Turns extends MY_Controller
         $id = ($this->input->post("id") > 0) ? $this->input->post("id") : 0;
         $initialTime = $this->input->post('initialTime');
 		$endTime = $this->input->post('endTime');
+		$name = $this->input->post('name');
         
         if ($identifier > 0){
             $output = $this->rest->get('turns/turn/', array("id"=>$identifier));
             
             if ($output->status){
                 $turn    = $output->data;
+                $name = $turn->name;
                 $initialTime = $turn->initial_time;
 				$endTime = $turn->end_time;
                 $id         = $turn->id;
@@ -50,6 +52,7 @@ class Turns extends MY_Controller
         
         $data = array();
         $data["title"]  = lang("Turns");
+        $data['name'] = $name;
         $data['initialTime'] = $initialTime;
 		$data['endTime'] = $endTime;
         $data["id"] = $id;
@@ -65,6 +68,7 @@ class Turns extends MY_Controller
         
         $this->form_validation->set_rules('initialTime', 'lang:initialTime', 'required');
 		$this->form_validation->set_rules('endTime', 'lang:endTime', 'required');
+		$this->form_validation->set_rules('name', 'lang:name', 'required');
                 
         if ($this->form_validation->run($this)){
             if ($this->input->post("id") > 0){

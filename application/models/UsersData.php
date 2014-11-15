@@ -21,6 +21,11 @@ class UsersData
      * @OneToOne(targetEntity="Users", inversedBy="user_data", cascade={"all"})
      */
     private $user;
+    
+    /**
+     * @OneToMany(targetEntity="Schedules", mappedBy="user")
+     */
+    private $turns;
 
     /**
      * @Column(type="string", nullable=false)
@@ -31,6 +36,14 @@ class UsersData
      * @Column(type="string", nullable=false)
      */
     private $telephone;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->turns = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -107,13 +120,48 @@ class UsersData
     {
         return $this->telephone;
     }
+    
+    /**
+     * Add turns
+     *
+     * @param \models\Schedules $turns
+     * @return UsersData
+     */
+    public function addTurn(\models\Schedules $turns)
+    {
+        $this->turns[] = $turns;
+    
+        return $this;
+    }
+
+    /**
+     * Remove turns
+     *
+     * @param \models\Schedules $turns
+     */
+    public function removeTurn(\models\Schedules $turns)
+    {
+        $this->turns->removeElement($turns);
+    }
+
+    /**
+     * Get turns
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTurns()
+    {
+        return $this->turns;
+    }
 
     public function toArray($user = true)
     {
         $return = array();
         
         $return['id']               = $this->getId();
-        $return['user']             = $this->getUser()->toArray();
+        if ($user){
+            $return['user']             = $this->getUser()->toArray();
+        }
         $return['identification']   = $this->getIdentification();
         $return['telephone']        = $this->getTelephone();
         
