@@ -150,3 +150,26 @@ $lang["holiday_edition"]    = "Holiday edited successfully";
 $lang["holiday_delete"]          = "Holiday deleted successfully";
 $lang["message_delete_holiday"]  = "Are you sure to delete the holiday?";
 
+/*TURNS*/
+$lang["turn"]    = "Turn";
+$lang['initialTime'] = 'InitialTime';
+$lang['endTime'] = 'EndTime';
+$lang["create_turn"]     = "Create turn";
+$lang["return_turn"]     = "Back to turns";
+$lang["turn_creation"]   = "Turn created successfully";
+$lang["turn_edition"]    = "Turn edited successfully";
+$lang["turn_delete"]          = "Turn deleted successfully";
+$lang["message_delete_turn"]  = "Are you sure to delete the turn?";
+
+/*SCHEDULES*/
+$lang["exist_turn"]    = "The turn already exist";
+$lang["schedule"]    = "Schedule";
+$lang['date'] = 'Date';
+$lang['turn'] = 'Turn';
+$lang['user'] = 'User';
+$lang["create_schedule"]     = "Create schedule";
+$lang["return_schedule"]     = "Back to schedules";
+$lang["schedule_creation"]   = "Schedule created successfully";
+$lang["schedule_edition"]    = "Schedule edited successfully";
+$lang["schedule_delete"]          = "Schedule deleted successfully";
+$lang["message_delete_schedule"]  = "Are you sure to delete the schedule?";

@@ -87,6 +87,24 @@ class UsersData extends \models\UsersData implements \Doctrine\ORM\Proxy\Proxy
         return parent::getTelephone();
     }
 
+    public function addTurn(\models\Schedules $turns)
+    {
+        $this->__load();
+        return parent::addTurn($turns);
+    }
+
+    public function removeTurn(\models\Schedules $turns)
+    {
+        $this->__load();
+        return parent::removeTurn($turns);
+    }
+
+    public function getTurns()
+    {
+        $this->__load();
+        return parent::getTurns();
+    }
+
     public function toArray($user = true)
     {
         $this->__load();
@@ -96,7 +114,7 @@ class UsersData extends \models\UsersData implements \Doctrine\ORM\Proxy\Proxy
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'identification', 'telephone', 'user');
+        return array('__isInitialized__', 'id', 'identification', 'telephone', 'user', 'turns');
     }
 
     public function __clone()

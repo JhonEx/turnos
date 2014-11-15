@@ -19,7 +19,7 @@ class UsersData extends MY_Controller
         $model = new Model("UsersData", "ud", array("id"=>"id", "identification"=>"identification", "telephone" => "telephone"));
         $model->setNumerics(array("ud.id"));
         
-        $user = new Model("Users", "u", array( "id" => "idU", "name"=>"name", "last_name"=>"last_name", "email"=>"email"));
+        $user = new Model("Users", "u", array("name"=>"name", "last_name"=>"last_name", "email"=>"email"));
         $user->setNumerics(array("u.id"));
         $user->setRelation("user");
         
@@ -33,6 +33,7 @@ class UsersData extends MY_Controller
         
         $actions = array();
         array_push($actions, new Action("usersdata", "form", "edit"));        
+        array_push($actions, new Action("schedules", "index", "turns"));        
         array_push($actions, new Action("usersdata", "delete", "delete", false));        
         
         $this->model     = $model;
