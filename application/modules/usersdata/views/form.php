@@ -8,9 +8,7 @@
     $opProfile = array();
     $opProfile[""] = lang("default_select");
     foreach ($profiles as $aProfile){
-        if ($aProfile->getId() != AuthConstants::ID_PROFILE_USER){
-            $opProfile[$aProfile->getId()] = $aProfile->getName();
-        }
+        $opProfile[$aProfile->getId()] = $aProfile->getName();
     }
     
     $fields = array();
