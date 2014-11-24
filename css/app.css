@@ -204,6 +204,8 @@ select[name*='_length'] {
 
 .action_answers,
 .action_permissions,
+.action_turns,
+.action_extra,
 .action_cities,
 .action_services {
   background-position: -264px 0; }
@@ -224,3 +226,28 @@ select[name*='_length'] {
 #drop-user-menu a {
   display: inline-block;
   width: 100%; }
+
+table#report{
+    margin: 0 auto;
+}
+
+#calendar .delete {
+  background: url("../images/glyphicons-halflings.png") no-repeat -312px 0;
+  display: inline-block;
+  height: 16px;
+  width: 16px; 
+}
+
+#calendar .turn{
+    display: inline-block;
+    height: 30px;
+    border: solid 1px;
+    margin: 3px;
+    padding: 3px;
+    border-radius: 3px;
+} 
+
+
+
+
+

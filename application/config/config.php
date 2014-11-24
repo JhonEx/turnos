@@ -400,6 +400,34 @@ $config["email_from"] = "admin@turnos.com";
 $config["email_from_name"] = "Admin turnos";
 
 
+/*
+  |--------------------------------------------------------------------------
+  | Months
+  |--------------------------------------------------------------------------
+ */
+$config['months'] = array();
+$config['months'][1] = "january";
+$config['months'][2] = "february";
+$config['months'][3] = "march";
+$config['months'][4] = "april";
+$config['months'][5] = "may";
+$config['months'][6] = "june";
+$config['months'][7] = "july";
+$config['months'][8] = "august";
+$config['months'][9] = "september";
+$config['months'][10] = "october";
+$config['months'][11] = "november";
+$config['months'][12] = "december";
+
+/*
+  |--------------------------------------------------------------------------
+  | WEEKDAYS
+  |--------------------------------------------------------------------------
+ */
+$config['weekdays'] = array('monday','tuesday','wednesday','thursday','friday','saturday','sunday');
+
+
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */
 

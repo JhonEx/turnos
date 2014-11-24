@@ -9,6 +9,8 @@ $lang["send"]       = "Send";
 $lang["clear"]      = "Clear";
 $lang["yes"]        = "YES";
 $lang["no"]         = "NO";
+$lang["turns"]         = "turns";
+$lang["extra"]         = "extra";
 
 $lang["default_select"]     = "-Select-";
 $lang["confirmation_delete"]= "Confirmation delete";
@@ -98,6 +100,12 @@ $lang["message_delete_user"]  = "Are you sure to delete the user?";
 $lang["register"]  = "Register";
 $lang["creationDate"]  = "Creation date";
 $lang["telephone"]  = "Telephone";
+$lang["init_date"]  = "Init date";
+$lang["end_date"]  = "End date";
+$lang["Report"]  = "Report";
+$lang["hours"]  = "hours";
+
+
 /*USERS DATA*/
 $lang["identification"] = "Identification";
 
@@ -173,3 +181,19 @@ $lang["schedule_creation"]   = "Schedule created successfully";
 $lang["schedule_edition"]    = "Schedule edited successfully";
 $lang["schedule_delete"]          = "Schedule deleted successfully";
 $lang["message_delete_schedule"]  = "Are you sure to delete the schedule?";
+$lang["return_users"]  = "Back to users";
+
+
+
+$lang['january']    = "january";
+$lang['february']   = "february";
+$lang['march']      = "march";
+$lang['april']      = "april";
+$lang['may']        = "may";
+$lang['june']       = "june";
+$lang['july']       = "july";
+$lang['august']     = "august";
+$lang['september']  = "september";
+$lang['october']    = "october";
+$lang['november']   = "november";
+$lang['december']   = "december";

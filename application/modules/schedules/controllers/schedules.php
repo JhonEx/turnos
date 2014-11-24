@@ -6,6 +6,7 @@ class Schedules extends MY_Controller
 	{
 		$actions = array();
 		$actions["create_schedule"] = site_url("schedules/form");
+		$actions["return_users"] = site_url("usersdata/index");
         
         if ($userId > 0){
             $this->session->set_userdata("userdata", $userId);
@@ -14,6 +15,132 @@ class Schedules extends MY_Controller
 		$data = array();
 		$data["title"] = lang("Schedules");
 		$this->view('list', $data, $actions);
+	}
+	
+	public function consult($userId)
+	{
+        $this->session->set_userdata("userdata", $userId);
+        
+		$data = array();
+		$data["title"] = lang("Schedules");
+		$this->view('consult', $data, array());
+	}
+    
+    private function getParameterListUser()
+    {
+        $this->load->helper('action');
+
+        $model = new Model("Schedules", "s", array("id" => "id", 'date' => 'date'));
+        $model->setNumerics(array("s.id"));
+        
+        $userData = new Model("UsersData", "ud", array());
+        $userData->setRelation("user");
+        $userData->setConditions(array("ud.id = " . $this->session->userdata("userdata")));
+        
+        $turn = new Model("Turns", "t", array("name" => "tname", "initialTime" => "initialTime", "endTime" => "endTime"));
+        $turn->setRelation("turn");
+        $turn->setTypesTime(array("initialTime", "endTime"));
+        
+        $relations = array();
+        $relations[] = $userData;
+        $relations[] = $turn;
+        
+        $this->model   = $model;
+        $this->actions = array();
+        $this->relations = $relations;
+    }    
+    
+    public function getListUser()
+    {
+        $this->load->helper('permissions');
+        $this->getParameterListUser();
+        
+        $getData = $this->input->get();
+
+        $arrayData  = $this->datatable->getData($getData, $this->model, $this->relations);
+        $registers  = array();
+
+        foreach ($arrayData['aaData'] as $register) {
+
+            $actions = "";
+            
+            foreach ($this->actions as $aAction){
+                if (hasRights($aAction->getMethod(), $aAction->getClass())){
+                    $url = $aAction->getUrl();
+                    $urlStr = "#";
+                    
+                    if ($url){
+                        $urlStr = site_url($aAction->getClass() . "/" . $aAction->getMethod()). "/" . $register[0];
+                    }
+                    
+                    $trans      = (Soporte::cadenaVacia(lang($aAction->getLabel())) == false) ? lang($aAction->getLabel()) : lang(ucfirst($aAction->getLabel()));
+                    $label      = "title='" . $trans . "'";
+                    $class      = "class='action_list action_" . $aAction->getLabel() . "'";
+                    $id         = "id='".$register[0]."'";
+                    $parameters = $label . " " . $class . " " . $id;
+                    $actions   .= Soporte::creaEnlaceTexto("", $urlStr, $parameters);
+                }
+            }
+            
+            $cont = 0;
+            
+            $fields = array_keys($this->model->getFields());
+            
+            foreach ($this->relations as $relation) {
+                foreach (array_keys($relation->getFields()) as $field) {
+                    $fields[] = $field;
+                }
+            }
+            
+            $typesTime = $this->model->getTypesTime();
+            
+            foreach ($this->relations as $relation) {
+                foreach ($relation->getTypesTime() as $field) {
+                    $typesTime[] = $field;
+                }
+            }
+            
+            foreach ($register as $aRegister){
+                if ($aRegister instanceof DateTime){
+                    $register[$cont] = $aRegister->format("Y-m-d");
+                    
+                    $aField = $fields[$cont];
+                    
+                    if (in_array($aField, $typesTime)){
+                        $register[$cont] = $aRegister->format("H:i:s");
+                    }
+                    
+                }
+                $cont++;
+            }
+            
+            $register[]  = $actions;
+            $registers[] = $register;
+        }
+
+        $arrayData['aaData'] = $registers;
+        echo json_encode($arrayData);
+    }
+
+
+	public function assign($userId)
+	{
+	    $this->loadRepository("Turns");
+        
+        $user = $this->em->find('models\UsersData', $userId);
+		
+		$actions = array();
+		$actions["return_users"] = site_url("usersdata/index");
+        
+		$data = array();
+		$data["title"] = lang("Schedules");
+		$data["user"] = $userId;
+        $data["weekdays"]  = $this->config->config["weekdays"];
+        $data["months"]    = $this->config->config["months"];
+        $data["schedules"] = $user->getTurns();
+        $data["turns"] = $this->Turns->findAll();
+        
+		$this->view('assign', $data, $actions);
 	}
 	
 	public function setListParameters()
@@ -88,6 +215,7 @@ class Schedules extends MY_Controller
         $message = "";
         $error   = "";
         $output  = ""; 
+        $id      = 0; 
         
         $this->form_validation->set_rules('date', 'lang:date', 'required');
 		$this->form_validation->set_rules('turn', 'lang:turn', 'required');
@@ -103,6 +231,7 @@ class Schedules extends MY_Controller
             if (empty($output) == false){
                 if ($output->status){
                     $message = ($this->input->post("id") > 0) ? lang('schedule_edition') : lang('schedule_creation');
+                    $id = $output->id;
                 }else{
                     $error = (isset($output->error)) ? $output->error : "";
                     $error = (empty($error) && isset($output->exist)) ? lang($output->exist) : ""; 
@@ -122,6 +251,7 @@ class Schedules extends MY_Controller
         if ($this->input->is_ajax_request()){
             $data["message"] = $message;
             $data["error"]   = $error;
+            $data["id"]   = $id;
             echo json_encode($data);
         }
     }

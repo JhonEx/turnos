@@ -32,6 +32,9 @@
         
         <script src="<?php echo base_url(); ?>js/vendor/custom.modernizr.js"></script>
         <script src="<?php echo base_url(); ?>js/jsapi.js"></script>
+        
+        <!-- Full Calender -->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>js/fullcalendar/fullcalendar/fullcalendar.css" />
     </head>
     <body> 
         <?=$header?>
@@ -65,6 +68,9 @@
 
         <script src="<?php echo base_url(); ?>js/jquery-ui-1.10.2/ui/jquery-ui.js"></script>
         <script src="<?php echo base_url(); ?>js/jquery.datetimepicker.js"></script>
+        
+        <!-- Full Calender -->
+        <script src='<?php echo base_url(); ?>js/fullcalendar/fullcalendar/fullcalendar.js'></script>
         
         <?=$JS?>
         

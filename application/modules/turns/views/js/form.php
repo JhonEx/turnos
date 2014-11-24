@@ -3,7 +3,7 @@
         $('#initialTime, #endTime').datetimepicker({
             datepicker:false,
             format:'H:i',
-            step:5
+            step:60
         });
 
         $("#form").validate({

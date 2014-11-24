@@ -5,12 +5,6 @@
         $opLanguages[$aLanguage] = lang($aLanguage);
     }
 
-    $opProfile = array();
-    $opProfile[""] = lang("default_select");
-    foreach ($profiles as $aProfile){
-        $opProfile[$aProfile->getId()] = $aProfile->getName();
-    }
-    
     $fields = array();
     $fields[lang('name')] = form_input(array('name'=>'name', 'class'=>'span10', 'value'=>$name));
     $fields[lang('last_name')] = form_input(array('name'=>'lastName', 'class'=>'span10', 'value'=>$last_name));
@@ -19,6 +13,6 @@
     $fields[lang('identification')] = form_input(array('name'=>'identification', 'class'=>'span10', 'value'=>$identification));
     $fields[lang('telephone')] = form_input(array('name'=>'telephone', 'class'=>'span10', 'value'=>$telephone));
     $fields[lang('language')] = form_dropdown("language", $opLanguages, $language, "class='span10'");
-    $fields[lang('profile')] = form_dropdown("idProfile", $opProfile, $idProfile, "class='span4'");
-    $hidden = array('id' => $id);
+    $fields[""] = "";
+    $hidden = array('id' => $id, 'profile' => AuthConstants::ID_PROFILE_USER);
     echo print_form_columns('/usersdata/persist/', $fields, $hidden);
