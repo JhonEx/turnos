@@ -5,11 +5,6 @@
         $opLanguages[$aLanguage] = lang($aLanguage);
     }
 
-    $opProfile = array();
-    $opProfile[""] = lang("default_select");
-    foreach ($profiles as $aProfile){
-        $opProfile[$aProfile->getId()] = $aProfile->getName();
-    }
     
     $fields = array();
     $fields[lang('name')] = form_input(array('name'=>'name', 'class'=>'span10', 'value'=>$name));
