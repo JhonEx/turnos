@@ -37,17 +37,24 @@ $(document).ready(function() {
         monthNames : monthNames
     });
     
-    // Contruir html de cada turno para cada dia
-    for (i in schedules){
-        var schedule = schedules[i];
+    updateTurns();
+    
+    function updateTurns()
+    {
+        $(".fc-day-content .turn").remove();
         
-        var html = "<div class='turn' turn='" + schedule.id + "'>";
-        html += schedule.turn;
-        html += "<a href='#' class='delete' turn='" + schedule.id + "'></a>";
-        html += "</div>";
-        
-        $("#calendar #" + schedule.date).append(html);
+        for (i in schedules){
+            var schedule = schedules[i];
+            
+            var html = "<div class='turn' turn='" + schedule.id + "'>";
+            html += schedule.turn;
+            html += "<a href='#' class='delete' turn='" + schedule.id + "'></a>";
+            html += "</div>";
+            
+            $("#calendar #" + schedule.date + " .fc-day-content").append(html);
+        }
     }
+    // Contruir html de cada turno para cada dia
     
     // Borrar un turno
     $(document).on('click', '.delete', function(){
@@ -56,9 +63,9 @@ $(document).ready(function() {
         $.post("<?php echo site_url('/schedules/delete'); ?>",
             {'id':obj.attr("turn"), '<?=$csrf?>': $('input[name=<?=$csrf?>]').val()},
             function(data){
-                if(data.message != ""){
-                    obj.parent().remove();
-                }
+                delete schedules[obj.attr("turn")];
+                
+                updateTurns();
             },
             'json'
         );
@@ -83,12 +90,12 @@ $(document).ready(function() {
                         $("#message").html(data.message);
                         $("#alert").show();
                         
-                        var html = "<div class='turn' turn='" + data.id + "'>";
-                        html += $("#turn option[value='" + $("#turn").val() + "']").text();
-                        html += "<a href='#' class='delete' turn='" + data.id + "'></a>";
-                        html += "</div>";
+                        var id = data.id;
+                        var date = currentDate;
+                        var turn = $("#turn option[value='" + $("#turn").val() + "']").text();
+                        schedules[id] = {id: id, date: date, turn: turn };
                         
-                        $("#calendar #" + currentDate).append(html);
+                        updateTurns();
                         
                     }
                     
@@ -118,6 +125,7 @@ $(document).ready(function() {
     // Cuando se cambia de mes se actualizan los servicios del calendario y actualizan los controle (Der, Izq)
     $(".fc-button-prev,  .fc-button-next").click(function(){
         updateControls();
+        updateTurns();
     });
     
     // Actualiza los controles del calendario (Izq, Der)
