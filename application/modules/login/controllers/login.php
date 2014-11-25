@@ -79,6 +79,11 @@ class Login extends MY_Controller
                 setcookie($cookie."_cookpass", $password, time() + 60 * 60 * 24 * 100, "/");
             }
             
+            if ($user->getProfile()->getId() == AuthConstants::ID_PROFILE_USER){
+                redirect("/schedules/consult/" . $user->getUserData()->getId());
+                exit();
+            }
+            
             redirect("/home/home/");
             
             exit();

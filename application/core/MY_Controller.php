@@ -70,6 +70,11 @@ abstract class MY_Controller extends MX_Controller
             $body["title_menu"] = $data["title"];
             $body["csrf"]       = $this->config->config["csrf_token_name"];
             $body["menu"]       = $this->getMenu($profile);
+            
+            if ($profile == AuthConstants::ID_PROFILE_USER){
+                $body["menu"]       = "";
+            }
+            
             $body["actions"]    = $actions;
         }
         

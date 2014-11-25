@@ -36,7 +36,7 @@ class UsersData extends REST_Controller
             	$this->response(NULL, 400);
             }
         
-            $profile = $this->em->find('models\Profiles', $this->put('idProfile'));
+            $profile = $this->em->find('models\Profiles', $this->post('profile'));
             
             $userData = $this->em->find('models\UsersData', $this->post("id"));
             $user = $userData->getUser();
@@ -70,7 +70,7 @@ class UsersData extends REST_Controller
     function userdata_put()
     {
         try {
-            $profile = $this->em->find('models\Profiles', $this->put('idProfile'));
+            $profile = $this->em->find('models\Profiles', $this->put('profile'));
             
             $user = new models\Users();
             $user->setProfile($profile);

@@ -33,7 +33,8 @@ class UsersData extends MY_Controller
         
         $actions = array();
         array_push($actions, new Action("usersdata", "form", "edit"));        
-        array_push($actions, new Action("schedules", "index", "turns"));        
+        array_push($actions, new Action("schedules", "assign", "turns"));        
+        array_push($actions, new Action("usersdata", "report", "extra"));        
         array_push($actions, new Action("usersdata", "delete", "delete", false));        
         
         $this->model     = $model;
@@ -46,7 +47,6 @@ class UsersData extends MY_Controller
         $this->loadRepository("Profiles");
         
         $id         = ($this->input->post("id") > 0) ? $this->input->post("id") : 0;
-        $idProfile  = $this->input->post("idProfile");
         $userId     = 0;
         $language   = $this->input->post("language");
         $name       = $this->input->post("name");
@@ -69,11 +69,7 @@ class UsersData extends MY_Controller
                 $id         = $user->id;
                 $identification = $user->identification;
                 $telephone  = $user->telephone;
-                $idProfile  = $user->profile->id;
                 
-                foreach($user->interests as $aInterest){
-                    $interestsUser[] = $aInterest->id;
-                }
             }
         }
 
@@ -87,11 +83,9 @@ class UsersData extends MY_Controller
         $data["last_name"]  = $lastName;
         $data["email"]      = $email;
         $data["id"]         = $id;
-        $data["idProfile"]  = $idProfile;
         $data["identification"] = $identification;
         $data["telephone"]  = $telephone;
         $data["languages"]  = $this->config->config["languages"];
-        $data["profiles"]   = $this->Profiles->findAll();
         
         $this->view('form', $data, $actions);
     }
@@ -117,7 +111,7 @@ class UsersData extends MY_Controller
             }else{
                 $output = $this->rest->put('usersdata/userdata', $this->input->post()); 
             }
-
+            
             if (empty($output) == false){
                 if ($output->status){
                     $message = ($this->input->post("id") > 0) ? lang('user_edition') : lang('user_creation');
@@ -169,5 +163,57 @@ class UsersData extends MY_Controller
         $data["warning"] = $warning;
         $data["error"]   = $error;
         echo json_encode($data);
+    }
+    
+    public function report($user)
+    {
+        $actions = array();
+        $actions["return_user"] = site_url("usersdata/index");
+        
+        $data = array();
+        $data["title"] = lang("Report");
+        $data["user"] = $user;
+        
+        $this->view('report', $data, $actions);      
+    }
+    
+    public function getReport()
+    {
+        $return = array();    
+            
+        $userId = $this->input->post("user");
+        $initDate = $this->input->post("init_date");
+        $endDate = $this->input->post("end_date");
+        
+        $user = $this->em->find('models\UsersData', $userId);
+        $turns = $user->getTurns();
+        
+        $this->loadRepository('Holidays');
+        foreach ($turns as $aTurn) {
+            if (strtotime($aTurn->getDate()->format("Y-m-d")) >= strtotime($initDate) && strtotime($aTurn->getDate()->format("Y-m-d")) <= strtotime($endDate)){
+                $difference = $this->differenceByHour($aTurn);
+                
+                $row = array();
+                $row["schedule"] = $aTurn->toArray();
+                $row["extra"] = ($difference > 8) ? $difference - 8 : 0;
+                $row["hours"] = $difference;
+                $row["holiday"] = ($this->Holidays->findOneByDate($aTurn->getDate())) ? lang("yes") : lang("no");
+                $return[] = $row;
+            }
+        }
+        
+        echo json_encode($return);
+    }
+    
+    public function differenceByHour(models\Schedules $schedule)
+    {
+        $turn = $schedule->getTurn();
+        
+        $initDate = strtotime($turn->getInitialTime()->format("H:i:s"));
+        $endDate = strtotime($turn->getEndTime()->format("H:i:s"));
+        
+        $difference = abs($initDate - $endDate) / 3600;
+        
+        return floor($difference);
     }
 }
