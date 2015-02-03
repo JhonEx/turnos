@@ -104,6 +104,9 @@ $lang["init_date"]  = "fecha Inicial";
 $lang["end_date"]  = "fecha Final";
 $lang["Report"]  = "Informe";
 $lang["hours"]  = "Horas";
+$lang["personal_data"]  = "Datos Personales";
+$lang["change_password"]  = "Cambiar Contrasena";
+
 
 
 /*USERS DATA*/

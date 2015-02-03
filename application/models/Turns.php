@@ -6,9 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @author Heyward Jimenez
- * @version 1.0
- * @created 23-Ene-2012 02:39:38 p.m.
+ * 
  * 
  * @Entity
  * @Table(name="turns")

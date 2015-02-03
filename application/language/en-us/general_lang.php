@@ -104,7 +104,8 @@ $lang["init_date"]  = "Init date";
 $lang["end_date"]  = "End date";
 $lang["Report"]  = "Report";
 $lang["hours"]  = "hours";
-
+$lang["personal_data"]  = "Datos Personales";
+$lang["change_password"]  = "Cambiar Contrasena";
 
 /*USERS DATA*/
 $lang["identification"] = "Identification";
