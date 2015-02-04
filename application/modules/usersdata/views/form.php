@@ -5,6 +5,7 @@
         $opLanguages[$aLanguage] = lang($aLanguage);
     }
 
+    
     $fields = array();
     $fields[lang('name')] = form_input(array('name'=>'name', 'class'=>'span10', 'value'=>$name));
     $fields[lang('last_name')] = form_input(array('name'=>'lastName', 'class'=>'span10', 'value'=>$last_name));

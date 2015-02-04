@@ -6,7 +6,9 @@
                 
                 <div class="row">
                     <div class="large-12 columns">
-                        <h4>Login</h4>
+                        <center><h4>LOGIN</h4></center>
+                        <h3>BIENVENIDO A ARGOS SOFTWARE</h3>
+                        <P>Por favor ingrese su usuario y contraseña</P>
                     </div>
                 </div>
 
@@ -62,7 +64,7 @@
                         </div>
                         
                         <div class="row-fluid" id="options-login">
-                            <a href="#" class="span6 btn-primary gray" id="forgot">Forgot password?</a>
+                            <a href="#" class="span6 btn-primary gray" id="forgot">¿Olvidó Contraseña?</a>
                             <a href="#" class="span6 btn-primary gray" id="return" style="display: none">Return</a>
                         </div>
 
