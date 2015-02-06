@@ -165,14 +165,17 @@ class UsersData extends MY_Controller
         echo json_encode($data);
     }
     
-    public function report($user)
+    public function report($userId)
     {
         $actions = array();
         $actions["return_user"] = site_url("usersdata/index");
         
+        $user = $this->em->find('models\UsersData', $userId);
+        $name = $user->getUser()->getName() . " " . $user->getUser()->getLastName();
+        
         $data = array();
-        $data["title"] = lang("Report");
-        $data["user"] = $user;
+        $data["title"] = lang("Report") . " : " . $name;
+        $data["user"] = $userId;
         
         $this->view('report', $data, $actions);      
     }
@@ -215,5 +218,42 @@ class UsersData extends MY_Controller
         $difference = abs($initDate - $endDate) / 3600;
         
         return floor($difference);
+    }
+    
+    public function chart()
+    {
+        $data = array();
+        $data["title"] = lang("Chart");
+        
+        $this->view('chart', $data);      
+    }
+    
+    public function getChart()
+    {
+        $return = array();    
+            
+        $initDate = $this->input->post("init_date");
+        $endDate = $this->input->post("end_date");
+        
+        $this->loadRepository("UsersData");
+        $users = $this->UsersData->findAll();
+        
+        foreach ($users as $aUser) {
+            $hours = 0;
+            
+            $turns = $aUser->getTurns();
+            
+            foreach ($turns as $aTurn) {
+                if (strtotime($aTurn->getDate()->format("Y-m-d")) >= strtotime($initDate) && strtotime($aTurn->getDate()->format("Y-m-d")) <= strtotime($endDate)){
+                    $difference = $this->differenceByHour($aTurn);
+                    $hours += $difference;
+                }
+            }
+            
+            $name = $aUser->getUser()->getName() . " " . $aUser->getUser()->getLastName();
+            $return[] = array("name" => $name, "hours" => $hours);
+        }
+        
+        echo json_encode($return);
     }
 }

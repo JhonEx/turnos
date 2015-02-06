@@ -72,6 +72,8 @@
         <!-- Full Calender -->
         <script src='<?php echo base_url(); ?>js/fullcalendar/fullcalendar/fullcalendar.js'></script>
         
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        
         <?=$JS?>
         
         <script type="text/javascript">
