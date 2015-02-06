@@ -132,8 +132,10 @@ class Schedules extends MY_Controller
 		$actions = array();
 		$actions["return_users"] = site_url("usersdata/index");
         
+        $name = $user->getUser()->getName() . " " . $user->getUser()->getLastName();
+        
 		$data = array();
-		$data["title"] = lang("Schedules");
+		$data["title"] = lang("Schedules") . " : " . $name;
 		$data["user"] = $userId;
         $data["weekdays"]  = $this->config->config["weekdays"];
         $data["months"]    = $this->config->config["months"];
